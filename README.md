@@ -67,10 +67,6 @@ The Ride Booking Application aims to simplify the process of booking and managin
 
 We welcome contributions! If you'd like to contribute, please fork the repository and create a pull request with your changes. Ensure your code adheres to the project's coding standards and includes appropriate tests.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ---
 
 I hope this application meets your needs and provides a smooth ride booking experience. If you have any questions or feedback, feel free to open an issue or contact us. Thank you for using our Ride Booking Application!
