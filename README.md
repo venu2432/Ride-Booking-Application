@@ -38,8 +38,9 @@ The Ride Booking Application aims to simplify the process of booking and managin
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/yourusername/ride-booking-app.git
-   cd ride-booking-app
+   git clone https://github.com/venu2432/Ride-Booking-Application.git
+   cd Ride-Booking-Application
+
    ```
 
 2. **Set Up PostgreSQL with PostGIS**:
