@@ -30,13 +30,15 @@ public class RiderServiceImpl implements RiderService {
     @Override
     public RideRequestDto requestRide(RideRequestDto rideRequestDto) {
         RideRequest rideRequest = modelMapper.map(rideRequestDto, RideRequest.class);
-        log.info(rideRequest.toString());
         rideRequest.setRideRequestStatus(RideRequestStatus.PENDING);
 
-        Double fare =rideFareCalculationStrategy.calculateFare(rideRequestDto);
+        Double fare =rideFareCalculationStrategy.calculateFare(rideRequest);
         rideRequest.setFare(fare);
+
         RideRequest savedRideRequest = rideRequestRepository.save(rideRequest);
+
         driverMatchingStrategy.findMatchingDriver(savedRideRequest);
+
         return modelMapper.map(savedRideRequest, RideRequestDto.class);
     }
 

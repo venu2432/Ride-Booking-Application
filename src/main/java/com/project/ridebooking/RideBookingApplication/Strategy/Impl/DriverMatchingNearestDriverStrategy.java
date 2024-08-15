@@ -3,6 +3,7 @@ package com.project.ridebooking.RideBookingApplication.Strategy.Impl;
 import com.project.ridebooking.RideBookingApplication.Dto.RideRequestDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Driver;
 import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
+import com.project.ridebooking.RideBookingApplication.Repository.DriverRepository;
 import com.project.ridebooking.RideBookingApplication.Strategy.DriverMatchingStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DriverMatchingNearestDriverStrategy implements DriverMatchingStrategy {
 
+    private final DriverRepository driverRepository;
+
     @Override
     public List<Driver> findMatchingDriver(RideRequest rideRequest) {
-        return List.of();
+        return driverRepository.findTenNearestDrivers(rideRequest.getPickUpLocation());
     }
+
 }
