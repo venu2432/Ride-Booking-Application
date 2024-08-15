@@ -6,5 +6,4 @@ public interface RideFareCalculationStrategy {
 
     Double calculateFare(RideRequest rideRequest);
 
-
 }

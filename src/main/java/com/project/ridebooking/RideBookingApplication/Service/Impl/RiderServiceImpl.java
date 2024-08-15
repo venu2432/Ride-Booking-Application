@@ -7,7 +7,10 @@ import com.project.ridebooking.RideBookingApplication.Dto.RiderDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideRequestStatus;
 import com.project.ridebooking.RideBookingApplication.Entity.Ride;
 import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
+import com.project.ridebooking.RideBookingApplication.Entity.Rider;
+import com.project.ridebooking.RideBookingApplication.Entity.User;
 import com.project.ridebooking.RideBookingApplication.Repository.RideRequestRepository;
+import com.project.ridebooking.RideBookingApplication.Repository.RiderRepository;
 import com.project.ridebooking.RideBookingApplication.Service.RiderService;
 import com.project.ridebooking.RideBookingApplication.Strategy.DriverMatchingStrategy;
 import com.project.ridebooking.RideBookingApplication.Strategy.RideFareCalculationStrategy;
@@ -26,6 +29,7 @@ public class RiderServiceImpl implements RiderService {
     private final RideFareCalculationStrategy rideFareCalculationStrategy;
     private final DriverMatchingStrategy driverMatchingStrategy;
     private final RideRequestRepository rideRequestRepository;
+    private final RiderRepository riderRepository;
 
     @Override
     public RideRequestDto requestRide(RideRequestDto rideRequestDto) {
@@ -60,5 +64,16 @@ public class RiderServiceImpl implements RiderService {
     @Override
     public List<RideDto> getAllMyRides() {
         return List.of();
+    }
+
+    @Override
+    public Rider createNewRide(User user){
+        Rider rider = Rider
+                .builder()
+                .user(user)
+                .rating(0.0)
+                .build();
+
+        return riderRepository.save(rider);
     }
 }

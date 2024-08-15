@@ -1,12 +1,14 @@
 package com.project.ridebooking.RideBookingApplication.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Rider {
 
     @Id
