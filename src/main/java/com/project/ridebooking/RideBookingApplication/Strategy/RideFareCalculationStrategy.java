@@ -1,10 +1,10 @@
 package com.project.ridebooking.RideBookingApplication.Strategy;
 
-import com.project.ridebooking.RideBookingApplication.Dto.RideRequestDto;
+import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
 
 public interface RideFareCalculationStrategy {
 
-    Double calculateFare(RideRequestDto rideRequestDto);
+    Double calculateFare(RideRequest rideRequest);
 
 
 }
