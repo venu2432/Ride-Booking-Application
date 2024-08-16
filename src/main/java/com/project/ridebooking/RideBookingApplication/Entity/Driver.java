@@ -3,11 +3,13 @@ package com.project.ridebooking.RideBookingApplication.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.locationtech.jts.geom.Point;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Driver {
 
     @Id
