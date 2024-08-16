@@ -1,13 +1,12 @@
 package com.project.ridebooking.RideBookingApplication.Dto;
 
-import com.project.ridebooking.RideBookingApplication.Entity.Driver;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.PaymentMethod;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideStatus;
-import com.project.ridebooking.RideBookingApplication.Entity.Rider;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.Point;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -17,9 +16,9 @@ public class RideDto {
 
     private Long id;
 
-    private Point pickUpLocation;
+    private LocationDto pickUpLocation;
 
-    private Point dropOffLocation;
+    private LocationDto dropOffLocation;
 
     private LocalDateTime createdTime;
 
@@ -36,4 +35,5 @@ public class RideDto {
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
+
 }

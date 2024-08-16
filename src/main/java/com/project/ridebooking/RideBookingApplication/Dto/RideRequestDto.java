@@ -5,7 +5,7 @@ import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideRequestSt
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.locationtech.jts.geom.Point;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +24,8 @@ public class RideRequestDto {
     private RiderDto rider;
 
     private PaymentMethod paymentMethod;
+
+    private Double fare;
 
     private RideRequestStatus rideRequestStatus;
 

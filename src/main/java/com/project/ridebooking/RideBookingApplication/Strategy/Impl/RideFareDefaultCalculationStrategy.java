@@ -6,8 +6,6 @@ import com.project.ridebooking.RideBookingApplication.Strategy.RideFareCalculati
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.project.ridebooking.RideBookingApplication.Service.DistanceService.RIDE_FARE_MULTIPLIER;
-
 @Service
 @RequiredArgsConstructor
 public class RideFareDefaultCalculationStrategy implements RideFareCalculationStrategy {
@@ -17,6 +15,6 @@ public class RideFareDefaultCalculationStrategy implements RideFareCalculationSt
     @Override
     public Double calculateFare(RideRequest rideRequest) {
         Double distance = distanceService.calculateDistance(rideRequest.getPickUpLocation(), rideRequest.getDropOffLocation());
-        return distance * RIDE_FARE_MULTIPLIER;
+        return distance/1000 * RIDE_FARE_MULTIPLIER;
     }
 }

@@ -1,6 +1,5 @@
 package com.project.ridebooking.RideBookingApplication.Strategy.Impl;
 
-import com.project.ridebooking.RideBookingApplication.Dto.RideRequestDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Driver;
 import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
 import com.project.ridebooking.RideBookingApplication.Repository.DriverRepository;
