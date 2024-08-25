@@ -3,11 +3,17 @@ package com.project.ridebooking.RideBookingApplication.Entity;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.TransactionMethod;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.TransactionType;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class WalletTransaction {
 
     @Id

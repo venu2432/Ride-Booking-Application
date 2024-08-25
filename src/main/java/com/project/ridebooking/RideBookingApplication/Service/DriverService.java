@@ -4,8 +4,8 @@ import com.project.ridebooking.RideBookingApplication.Dto.DriverDto;
 import com.project.ridebooking.RideBookingApplication.Dto.RideDto;
 import com.project.ridebooking.RideBookingApplication.Dto.RiderDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Driver;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface DriverService {
 
@@ -21,8 +21,10 @@ public interface DriverService {
 
     DriverDto getMyProfile();
 
-    List<RideDto> getAllMyRides();
+    Page<RideDto> getAllMyRides(PageRequest pageRequest);
 
     Driver getCurrentDriver();
+
+    Driver updateDriverAvailability(Driver driver, Boolean availability);
 
 }

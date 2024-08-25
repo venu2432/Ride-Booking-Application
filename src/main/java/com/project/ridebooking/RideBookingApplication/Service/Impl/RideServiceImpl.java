@@ -1,11 +1,11 @@
 package com.project.ridebooking.RideBookingApplication.Service.Impl;
 
-import com.project.ridebooking.RideBookingApplication.Dto.RideRequestDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Driver;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideRequestStatus;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideStatus;
 import com.project.ridebooking.RideBookingApplication.Entity.Ride;
 import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
+import com.project.ridebooking.RideBookingApplication.Entity.Rider;
 import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Repository.RideRepository;
 import com.project.ridebooking.RideBookingApplication.Service.RideRequestService;
@@ -32,10 +32,6 @@ public class RideServiceImpl implements RideService {
                 .orElseThrow(() -> new ResourceNotFoundException("cannot find ride with id: "+id));
     }
 
-    @Override
-    public void matchWithDiver(RideRequestDto rideRequestDto) {
-
-    }
 
     @Override
     public Ride createNewRide(RideRequest rideRequest, Driver driver) {
@@ -55,13 +51,13 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
-    public Page<Ride> getAllRidesOfRider(Long riderId, PageRequest pageRequest) {
-        return null;
+    public Page<Ride> getAllRidesOfRider(Rider rider, PageRequest pageRequest) {
+        return rideRepository.findByRider(rider, pageRequest);
     }
 
     @Override
-    public Page<Ride> getAllOfRiderOfDiver(Long driverId, PageRequest pageRequest) {
-        return null;
+    public Page<Ride> getAllOfRidesOfDiver(Driver driver, PageRequest pageRequest) {
+        return rideRepository.findByDriver(driver, pageRequest);
     }
 
     private String getenrateRandomOtp(){
