@@ -5,7 +5,6 @@ import com.project.ridebooking.RideBookingApplication.Entity.Enums.PaymentStatus
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.TransactionMethod;
 import com.project.ridebooking.RideBookingApplication.Entity.Payment;
 import com.project.ridebooking.RideBookingApplication.Repository.PaymentRepository;
-import com.project.ridebooking.RideBookingApplication.Service.PaymentService;
 import com.project.ridebooking.RideBookingApplication.Service.WalletService;
 import com.project.ridebooking.RideBookingApplication.Strategy.PaymentStrategy;
 import lombok.RequiredArgsConstructor;

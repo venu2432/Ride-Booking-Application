@@ -11,6 +11,7 @@ import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFound
 import com.project.ridebooking.RideBookingApplication.Repository.RideRequestRepository;
 import com.project.ridebooking.RideBookingApplication.Repository.RiderRepository;
 import com.project.ridebooking.RideBookingApplication.Service.DriverService;
+import com.project.ridebooking.RideBookingApplication.Service.RatingService;
 import com.project.ridebooking.RideBookingApplication.Service.RideService;
 import com.project.ridebooking.RideBookingApplication.Service.RiderService;
 import com.project.ridebooking.RideBookingApplication.Strategy.RideStrategyManager;
@@ -35,6 +36,8 @@ public class RiderServiceImpl implements RiderService {
     private final RiderRepository riderRepository;
     private final RideService rideService;
     private final DriverService driverService;
+    private final RatingService ratingService;
+
 
     @Override
     @Transactional
@@ -73,7 +76,15 @@ public class RiderServiceImpl implements RiderService {
 
     @Override
     public DriverDto rateDriver(Long rideId, Integer rating) {
-        return null;
+        Ride ride =  rideService.getRideById(rideId);
+        Rider rider = getCurrentRider();
+        if(!rider.equals(ride.getRider())){
+            throw new RuntimeException("Rider cannot rate the ride");
+        }
+        if(!ride.getRideStatus().equals(RideStatus.ENDED)){
+            throw new RuntimeException("Ride status is not ended, status: "+ride.getRideStatus());
+        }
+        return ratingService.rateDriver(ride, rating);
     }
 
     @Override

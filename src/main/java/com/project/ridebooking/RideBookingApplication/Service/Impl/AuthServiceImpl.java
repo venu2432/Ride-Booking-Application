@@ -3,12 +3,14 @@ package com.project.ridebooking.RideBookingApplication.Service.Impl;
 import com.project.ridebooking.RideBookingApplication.Dto.DriverDto;
 import com.project.ridebooking.RideBookingApplication.Dto.SignUpDto;
 import com.project.ridebooking.RideBookingApplication.Dto.UserDto;
+import com.project.ridebooking.RideBookingApplication.Entity.Driver;
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.Role;
 import com.project.ridebooking.RideBookingApplication.Entity.User;
+import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Exception.RunTimeConflictException;
-import com.project.ridebooking.RideBookingApplication.Repository.RiderRepository;
 import com.project.ridebooking.RideBookingApplication.Repository.UserRepository;
 import com.project.ridebooking.RideBookingApplication.Service.AuthService;
+import com.project.ridebooking.RideBookingApplication.Service.DriverService;
 import com.project.ridebooking.RideBookingApplication.Service.RiderService;
 import com.project.ridebooking.RideBookingApplication.Service.WalletService;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +25,10 @@ import java.util.Set;
 public class AuthServiceImpl implements AuthService {
 
     private final ModelMapper modelMapper;
-
     private final UserRepository userRepository;
-
     private final RiderService riderService;
-    private final RiderRepository riderRepository;
     private final WalletService walletService;
+    private final DriverService driverService;
 
     @Override
     public String login(String email, String password) {
@@ -52,7 +52,23 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public DriverDto onboardNewDriver(Long userId) {
-        return null;
+    public DriverDto onboardNewDriver(Long userId, String vehicleId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new ResourceNotFoundException("User not found with user id: "+userId);
+        });
+
+        if(user.getRoles().contains(Role.DRIVER))
+            throw new RunTimeConflictException("User is already a driver");
+
+        Driver driver = Driver.builder()
+                .user(user)
+                .rating(0.0)
+                .available(true)
+                .vehicleId(vehicleId)
+                .build();
+        user.getRoles().add(Role.DRIVER);
+        userRepository.save(user);
+        Driver createdDriver = driverService.createNewDriver(driver);
+        return modelMapper.map(createdDriver, DriverDto.class);
     }
 }
