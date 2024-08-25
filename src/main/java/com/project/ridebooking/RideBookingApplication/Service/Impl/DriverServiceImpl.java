@@ -1,8 +1,13 @@
 package com.project.ridebooking.RideBookingApplication.Service.Impl;
 
-import com.project.ridebooking.RideBookingApplication.Dto.*;
-import com.project.ridebooking.RideBookingApplication.Entity.Enums.*;
-import com.project.ridebooking.RideBookingApplication.Entity.*;
+import com.project.ridebooking.RideBookingApplication.Dto.DriverDto;
+import com.project.ridebooking.RideBookingApplication.Dto.RideDto;
+import com.project.ridebooking.RideBookingApplication.Dto.RiderDto;
+import com.project.ridebooking.RideBookingApplication.Entity.Driver;
+import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideRequestStatus;
+import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideStatus;
+import com.project.ridebooking.RideBookingApplication.Entity.Ride;
+import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
 import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Repository.DriverRepository;
 import com.project.ridebooking.RideBookingApplication.Service.*;
@@ -24,6 +29,7 @@ public class DriverServiceImpl implements DriverService {
     private final RideService rideService;
     private final ModelMapper modelMapper;
     private final PaymentService paymentService;
+    private final RatingService ratingService;
 
 
     @Override
@@ -57,7 +63,10 @@ public class DriverServiceImpl implements DriverService {
         }
         currentRide.setStartTime(LocalDateTime.now());
         Ride savedRide = rideService.updateRideStatus(currentRide, RideStatus.ONGOING);
+
         paymentService.createNewPayment(savedRide);
+        ratingService.createNewRating(savedRide);
+
         return modelMapper.map(savedRide, RideDto.class);
     }
 
@@ -82,7 +91,15 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public RiderDto rateRider(Long rideId, Integer rating) {
-        return null;
+        Ride ride =  rideService.getRideById(rideId);
+        Driver currentDriver = getCurrentDriver();
+        if(!currentDriver.equals(ride.getDriver())){
+            throw new RuntimeException("Driver cannot rate the ride");
+        }
+        if(!ride.getRideStatus().equals(RideStatus.ENDED)){
+            throw new RuntimeException("Ride status is not ended, status: "+ride.getRideStatus());
+        }
+        return ratingService.rateRider(ride, rating);
     }
 
     @Override
@@ -127,4 +144,10 @@ public class DriverServiceImpl implements DriverService {
         driver.setAvailable(availability);
         return driverRepository.save(driver);
     }
+
+    @Override
+    public Driver createNewDriver(Driver driver) {
+        return driverRepository.save(driver);
+    }
+
 }

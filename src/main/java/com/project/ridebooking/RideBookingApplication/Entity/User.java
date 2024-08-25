@@ -8,7 +8,10 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = "APP_USER")
+@Table(name = "APP_USER",
+indexes = {
+        @Index(name = "idx_user_email", columnList = "email")
+})
 @Getter
 @Setter
 public class User {
