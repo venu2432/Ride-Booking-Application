@@ -10,6 +10,7 @@ import com.project.ridebooking.RideBookingApplication.Repository.RiderRepository
 import com.project.ridebooking.RideBookingApplication.Repository.UserRepository;
 import com.project.ridebooking.RideBookingApplication.Service.AuthService;
 import com.project.ridebooking.RideBookingApplication.Service.RiderService;
+import com.project.ridebooking.RideBookingApplication.Service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final RiderService riderService;
     private final RiderRepository riderRepository;
+    private final WalletService walletService;
 
     @Override
     public String login(String email, String password) {
@@ -44,8 +46,8 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(Set.of(Role.RIDER));
         User savedUser = userRepository.save(user);
 
-        riderService.createNewRide(user);
-
+        riderService.createNewRide(savedUser);
+        walletService.createNewWallet(savedUser);
         return modelMapper.map(savedUser, UserDto.class);
     }
 

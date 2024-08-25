@@ -6,8 +6,8 @@ import com.project.ridebooking.RideBookingApplication.Dto.RideRequestDto;
 import com.project.ridebooking.RideBookingApplication.Dto.RiderDto;
 import com.project.ridebooking.RideBookingApplication.Entity.Rider;
 import com.project.ridebooking.RideBookingApplication.Entity.User;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface RiderService {
 
@@ -19,7 +19,7 @@ public interface RiderService {
 
     RiderDto getMyProfile();
 
-    List<RideDto> getAllMyRides();
+    Page<RideDto> getAllMyRides(PageRequest pageRequest);
 
     Rider createNewRide(User user);
 
