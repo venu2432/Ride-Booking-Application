@@ -9,12 +9,17 @@ import com.project.ridebooking.RideBookingApplication.Entity.User;
 import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Exception.RunTimeConflictException;
 import com.project.ridebooking.RideBookingApplication.Repository.UserRepository;
+import com.project.ridebooking.RideBookingApplication.Security.JWTService;
 import com.project.ridebooking.RideBookingApplication.Service.AuthService;
 import com.project.ridebooking.RideBookingApplication.Service.DriverService;
 import com.project.ridebooking.RideBookingApplication.Service.RiderService;
 import com.project.ridebooking.RideBookingApplication.Service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,10 +34,21 @@ public class AuthServiceImpl implements AuthService {
     private final RiderService riderService;
     private final WalletService walletService;
     private final DriverService driverService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JWTService jwtService;
 
     @Override
-    public String login(String email, String password) {
-        return "";
+    public String[] login(String email, String password) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
+
+
+        User user = (User)  authentication.getPrincipal();
+
+        String accessToken = jwtService.generateToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+        return new String[]{accessToken, refreshToken};
     }
 
     @Override
@@ -44,6 +60,7 @@ public class AuthServiceImpl implements AuthService {
         }
         User user = modelMapper.map(signUpDto, User.class);
         user.setRoles(Set.of(Role.RIDER));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 
         riderService.createNewRide(savedUser);

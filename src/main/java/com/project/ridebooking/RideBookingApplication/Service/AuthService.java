@@ -6,7 +6,7 @@ import com.project.ridebooking.RideBookingApplication.Dto.UserDto;
 
 public interface AuthService {
 
-    String login(String email, String password);
+    String[] login(String email, String password);
 
     UserDto singUp(SignUpDto signUpDto);
 
