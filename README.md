@@ -1,6 +1,6 @@
 # Ride Booking Application
 
-Welcome to the Ride Booking Application repository! This Spring Boot application provides a seamless experience for users to book rides and for drivers to accept them. Leveraging advanced technologies such as PostgreSQL with the PostGIS extension and the Open Source Routing Machine (OSRM), this application ensures efficient handling of geospatial data and precise distance calculations.
+Welcome to the Ride Booking Application repository! This Spring Boot application provides a seamless experience for users to book rides and for drivers to accept them. Leveraging advanced technologies such as PostgreSQL with the PostGIS extension and the Open Source Routing Machine (OSRM), this application ensures efficient handling of geospatial data and precise distance calculations. Additionally, Spring Security has been implemented to ensure that the platform is robust, reliable, and secure for all users.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to the Ride Booking Application repository! This Spring Boot application
 
 ## Introduction
 
-The Ride Booking Application aims to simplify the process of booking and managing rides. Users can effortlessly book rides, while drivers have the flexibility to view and accept ride requests. The application employs sophisticated algorithms for fare calculation and driver matching, ensuring a fair and efficient system for all users.
+The Ride Booking Application aims to simplify the process of booking and managing rides. Users can effortlessly book rides, while drivers have the flexibility to view and accept ride requests. The application employs sophisticated algorithms for fare calculation and driver matching, ensuring a fair and efficient system for all users. The application ensures a high level of usability while prioritizing scalability and maintainability, making it ideal for further expansion and customization in real-world deployments.
 
 ## Technologies Used
 
@@ -33,6 +33,14 @@ The Ride Booking Application aims to simplify the process of booking and managin
 - **Fare Calculation**: Multiple strategies for calculating fares, considering distance, time, and demand.
 - **Driver Matching**: Advanced algorithms to match users with the most suitable drivers.
 - **Dynamic Pricing**: Allows riders to adjust fares based on their preferences and current demand.
+
+## Security
+
+Security is a core component of the Ride Booking Application. With **Spring Security**, application ensures that both riders and drivers have secure access to the platform through the following measures:
+
+- **User Authentication**: Every user and driver must sign up and log in using a secure authentication process.
+- **Role-Based Authorization**: User roles (rider or driver) are assigned specific permissions, ensuring that only authorized users can perform specific actions.
+- **Password Encryption**: All user passwords are securely hashed and encrypted, safeguarding them against breaches.
 
 ## Installation and Setup
 
