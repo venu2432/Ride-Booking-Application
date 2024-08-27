@@ -8,6 +8,7 @@ import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideRequestSt
 import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideStatus;
 import com.project.ridebooking.RideBookingApplication.Entity.Ride;
 import com.project.ridebooking.RideBookingApplication.Entity.RideRequest;
+import com.project.ridebooking.RideBookingApplication.Entity.User;
 import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Repository.DriverRepository;
 import com.project.ridebooking.RideBookingApplication.Service.*;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -136,7 +138,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver getCurrentDriver() {
-        return driverRepository.findById(2L).orElseThrow(() -> new ResourceNotFoundException("Current driver not found"));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return driverRepository.findByUser(user).orElseThrow(() ->
+                new ResourceNotFoundException("Current driver not associated with this user: "+user.getId()));
     }
 
     @Override
