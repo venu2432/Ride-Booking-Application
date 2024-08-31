@@ -10,10 +10,7 @@ import com.project.ridebooking.RideBookingApplication.Entity.Enums.RideStatus;
 import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFoundException;
 import com.project.ridebooking.RideBookingApplication.Repository.RideRequestRepository;
 import com.project.ridebooking.RideBookingApplication.Repository.RiderRepository;
-import com.project.ridebooking.RideBookingApplication.Service.DriverService;
-import com.project.ridebooking.RideBookingApplication.Service.RatingService;
-import com.project.ridebooking.RideBookingApplication.Service.RideService;
-import com.project.ridebooking.RideBookingApplication.Service.RiderService;
+import com.project.ridebooking.RideBookingApplication.Service.*;
 import com.project.ridebooking.RideBookingApplication.Strategy.RideStrategyManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -38,11 +36,12 @@ public class RiderServiceImpl implements RiderService {
     private final RideService rideService;
     private final DriverService driverService;
     private final RatingService ratingService;
+    private final WeatherService weatherService;
 
 
     @Override
     @Transactional
-    public RideRequestDto requestRide(RideRequestDto rideRequestDto) {
+    public RideRequestDto requestRide(RideRequestDto rideRequestDto) throws ExecutionException, InterruptedException {
         Rider rider = getCurrentRider();
         RideRequest rideRequest = modelMapper.map(rideRequestDto, RideRequest.class);
         rideRequest.setRideRequestStatus(RideRequestStatus.PENDING);

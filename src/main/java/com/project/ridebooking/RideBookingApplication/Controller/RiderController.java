@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @RequestMapping("/rider")
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class RiderController {
     private final RiderService riderService;
 
     @PostMapping("/requestRide")
-    public ResponseEntity<RideRequestDto> requestRide(@RequestBody RideRequestDto requestBody){
+    public ResponseEntity<RideRequestDto> requestRide(@RequestBody RideRequestDto requestBody) throws ExecutionException, InterruptedException {
         return ResponseEntity.ok(riderService.requestRide(requestBody));
     }
 

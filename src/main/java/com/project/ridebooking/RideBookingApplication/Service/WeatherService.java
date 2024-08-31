@@ -4,8 +4,6 @@ import org.locationtech.jts.geom.Point;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface DistanceService {
-
-    public CompletableFuture<Double> calculateDistance(Point src, Point dest);
-
+public interface WeatherService {
+    public CompletableFuture<Double> getWeatherMultiplier(Point point);
 }
