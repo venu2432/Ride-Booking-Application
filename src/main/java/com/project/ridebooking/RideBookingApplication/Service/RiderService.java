@@ -9,9 +9,11 @@ import com.project.ridebooking.RideBookingApplication.Entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.concurrent.ExecutionException;
+
 public interface RiderService {
 
-    RideRequestDto requestRide(RideRequestDto rideRequestDto);
+    RideRequestDto requestRide(RideRequestDto rideRequestDto) throws ExecutionException, InterruptedException;
 
     RideDto cancelRide(Long rideId);
 
