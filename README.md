@@ -30,7 +30,7 @@ The Ride Booking Application aims to simplify the process of booking and managin
 - **Driver Ride Acceptance**: Easy-to-use platform for drivers to view and accept ride requests.
 - **Geospatial Data Handling**: Efficient management of driver locations using PostGIS.
 - **Distance Calculation**: Accurate distance computations for rides via OSRM.
-- **Fare Calculation**: Multiple strategies for calculating fares, considering distance, time, and demand.
+- **Fare Calculation**: Multiple strategies for calculating fares, considering distance, time, weather conditions and demand.
 - **Driver Matching**: Advanced algorithms to match users with the most suitable drivers.
 - **Dynamic Pricing**: Allows riders to adjust fares based on their preferences and current demand.
 
