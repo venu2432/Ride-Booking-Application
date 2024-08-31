@@ -1,6 +1,6 @@
 # Ride Booking Application
 
-Welcome to the Ride Booking Application repository! This Spring Boot application provides a seamless experience for users to book rides and for drivers to accept them. Leveraging advanced technologies such as PostgreSQL with the PostGIS extension and the Open Source Routing Machine (OSRM), this application ensures efficient handling of geospatial data and precise distance calculations. Additionally, Spring Security has been implemented to ensure that the platform is robust, reliable, and secure for all users.
+Welcome to the Ride Booking Application repository! This Spring Boot application provides a seamless experience for users to book rides and for drivers to accept them. Leveraging advanced technologies such as PostgreSQL with the PostGIS extension, the Open Source Routing Machine (OSRM), and real-time weather data integration, this application ensures efficient handling of geospatial data, precise distance calculations, and dynamic fare adjustments based on current weather conditions. Additionally, Spring Security has been implemented to ensure that the platform is robust, reliable, and secure for all users.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to the Ride Booking Application repository! This Spring Boot application
 
 ## Introduction
 
-The Ride Booking Application aims to simplify the process of booking and managing rides. Users can effortlessly book rides, while drivers have the flexibility to view and accept ride requests. The application employs sophisticated algorithms for fare calculation and driver matching, ensuring a fair and efficient system for all users. The application ensures a high level of usability while prioritizing scalability and maintainability, making it ideal for further expansion and customization in real-world deployments.
+The Ride Booking Application simplifies the process of booking and managing rides. Users can effortlessly book rides, while drivers have the flexibility to view and accept ride requests. The application employs sophisticated algorithms for fare calculation and driver matching, ensuring a fair and efficient system for all users. It integrates real-time weather data to dynamically adjust fares, providing a responsive pricing model based on current weather conditions. The application ensures a high level of usability while prioritizing scalability and maintainability, making it ideal for further expansion and customization in real-world deployments.
 
 ## Technologies Used
 
@@ -23,6 +23,7 @@ The Ride Booking Application aims to simplify the process of booking and managin
 - **PostgreSQL**: A powerful relational database for storing user, ride, and driver information.
 - **PostGIS**: An extension for PostgreSQL to handle geospatial data, crucial for storing and querying driver locations.
 - **OSRM (Open Source Routing Machine)**: Used for precise distance and route calculations.
+- **WeatherAPI**: Provides real-time weather data to dynamically adjust pricing based on current weather conditions.
 
 ## Features
 
