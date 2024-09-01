@@ -13,6 +13,7 @@ import com.project.ridebooking.RideBookingApplication.Exception.ResourceNotFound
 import com.project.ridebooking.RideBookingApplication.Repository.DriverRepository;
 import com.project.ridebooking.RideBookingApplication.Service.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DriverServiceImpl implements DriverService {
 
     private final RideRequestService rideRequestService;
@@ -32,6 +34,7 @@ public class DriverServiceImpl implements DriverService {
     private final ModelMapper modelMapper;
     private final PaymentService paymentService;
     private final RatingService ratingService;
+    private final NotificationMailService notificationMailService;
 
 
     @Override
@@ -119,6 +122,7 @@ public class DriverServiceImpl implements DriverService {
         Driver savedDriver = updateDriverAvailability(currentDriver, false);
 
         Ride createdRide = rideService.createNewRide(rideRequest, savedDriver);
+        notificationMailService.sendConfirmationMail(createdRide);
         return modelMapper.map(createdRide, RideDto.class);
     }
 

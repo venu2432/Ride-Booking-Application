@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Booking Notification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+            background-color: #f3f2f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 24px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 24px;
+        }
+        .header img {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+        }
+        .content {
+            margin-bottom: 24px;
+        }
+        .content h1 {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.25;
+            margin: 0 0 16px 0;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 8px;
+            text-align: left;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0 0 16px 0;
+            text-align: left;
+        }
+        .content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .content ul li {
+            margin-bottom: 8px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 16px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 24px;
+        }
+        .footer p {
+            font-size: 14px;
+            margin: 0;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+    </div>
+    <div class="content">
+        <h1>Your Ride Booking Confirmation</h1>
+        <h2>Hi <span th:text="${customerName}"></span>,</h2>
+        <p>Thank you for booking a ride with us! Your ride details are as follows:</p>
+        <ul>
+            <li><strong>Pickup Location:</strong> <span th:text="${pickupLocation}"></span></li>
+            <li><strong>Dropoff Location:</strong> <span th:text="${dropoffLocation}"></span></li>
+            <li><strong>Date & Time:</strong> <span th:text="${rideDateTime}"></span></li>
+            <li><strong>Driver:</strong> <span th:text="${driverName}"></span></li>
+        </ul>
+        <div class="button-container">
+            <a th:href="@{${accountLink}}" class="button" target="_blank">Manage Booking</a>
+        </div>
+    </div>
+    <div class="footer">
+        <p>If you have any questions, feel free to contact our support team.</p>
+        <p><a href="mailto:your.ride.booking@gmail.com">your.ride.booking@gmail.com</a></p>
+    </div>
+</div>
+</body>
+</html>
