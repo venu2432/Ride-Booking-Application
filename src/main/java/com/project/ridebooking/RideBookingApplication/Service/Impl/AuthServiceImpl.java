@@ -91,10 +91,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String refreshToken(String refreshToken) {
-        Long userId = jwtService.getUserIdFromToken(refreshToken);
+        Long userId = jwtService.getUserIdFromRefreshToken(refreshToken);
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new ResourceNotFoundException("User not found with user id: "+userId)
         );
-        return jwtService.generateRefreshToken(user);
+        return jwtService.generateToken(user);
     }
 }
